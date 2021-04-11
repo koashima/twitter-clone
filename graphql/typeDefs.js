@@ -1,8 +1,6 @@
 const { gql } = require('apollo-server');
 const { GraphQLScalarType, Kind } = require('graphql');
 
-
-
 module.exports = gql`
 
   scalar Date
@@ -27,11 +25,14 @@ module.exports = gql`
   }
   type Query {
     getPosts: [Post]
+    getPost(postId: ID!): Post
     getUsers: [User]
   }
   type Mutation {
     register(registerInput: RegisterInput): User!
     login(username: String!, password: String!): User!
+    createPost(body: String!): Post!
+    deletePost(postId: ID!): String!
   }
 `;
 
