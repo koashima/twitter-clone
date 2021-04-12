@@ -6,16 +6,16 @@ const postSchema = new Schema(
     username: String,
     comments: [
       {
-        body: String,
-        username: String,
+        type: new Schema(
+          { body: String, username: String },
+          { timestamps: true }
+        ),
       },
-      { timestamps: true },
     ],
     likes: [
       {
-        username: String,
+        type: new Schema({ username: String }, { timestamps: true }),
       },
-      { timestamps: true },
     ],
     user: {
       type: Schema.Types.ObjectId,
