@@ -34,7 +34,7 @@ const Navbar = () => {
                             {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
                             <a
                               href="/"
-                              className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                              className="text-white hover:bg-yellow-500 px-3 py-2 rounded-md text-sm font-medium"
                             >
                               {item}
                             </a>
@@ -43,7 +43,7 @@ const Navbar = () => {
                           <a
                             key={item}
                             href={item}
-                            className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                            className="text-white hover:bg-yellow-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                           >
                             {item}
                           </a>
@@ -54,10 +54,6 @@ const Navbar = () => {
                 </div>
                 <div className="hidden md:block">
                   <div className="ml-4 flex items-center md:ml-6">
-                    <button className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                      <span className="sr-only">View notifications</span>
-                      <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
 
                     {/* Profile dropdown */}
                     <Menu as="div" className="ml-3 relative">
@@ -111,7 +107,7 @@ const Navbar = () => {
                 </div>
                 <div className="-mr-2 flex md:hidden">
                   {/* Mobile menu button */}
-                  <Disclosure.Button className="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                  <Disclosure.Button className=" inline-flex items-center justify-center p-2 rounded-md text-yellow-500 hover:text-yellow-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-yellow-500 focus:ring-yellow-400">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -130,7 +126,7 @@ const Navbar = () => {
                     <Fragment key={item}>
                       {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
                       <a
-                        href="#"
+                        href="/"
                         className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
                       >
                         {item}
@@ -139,8 +135,8 @@ const Navbar = () => {
                   ) : (
                     <a
                       key={item}
-                      href="#"
-                      className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                      href={item}
+                      className="text-gray-800 hover:bg-yellow-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                     >
                       {item}
                     </a>
