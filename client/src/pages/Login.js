@@ -1,11 +1,23 @@
-import React from 'react'
+import React from 'react';
 
 const Login = () => {
-  return(
-    <div>
-      <h1>Login</h1>
-    </div>
-  )
-}
+  return (
+    <header className="bg-white shadow">
+      <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <h1 className="text-3xl font-bold text-gray-900">LOGIN!</h1>
+      </div>
+      <div>
+        Icons made by{' '}
+        <a href="https://www.freepik.com" title="Freepik">
+          Freepik
+        </a>
+        from
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          www.flaticon.com
+        </a>
+      </div>
+    </header>
+  );
+};
 
-export default Login
+export default Login;
