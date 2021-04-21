@@ -1,5 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 
@@ -32,21 +33,21 @@ const Navbar = () => {
                         itemIdx === 0 ? (
                           <Fragment key={item}>
                             {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
-                            <a
-                              href="/"
-                              className="text-white hover:bg-yellow-500 px-3 py-2 rounded-md text-sm font-medium"
+                            <Link
+                              to="/"
+                              className="text-white hover:bg-yellow-500 px-3 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 rounded"
                             >
                               {item}
-                            </a>
+                            </Link>
                           </Fragment>
                         ) : (
-                          <a
+                          <Link
                             key={item}
-                            href={item}
-                            className="text-white hover:bg-yellow-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                            to={item}
+                            className="text-white hover:bg-yellow-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 rounded"
                           >
                             {item}
-                          </a>
+                          </Link>
                         )
                       )}
                     </div>
@@ -54,7 +55,6 @@ const Navbar = () => {
                 </div>
                 <div className="hidden md:block">
                   <div className="ml-4 flex items-center md:ml-6">
-
                     {/* Profile dropdown */}
                     <Menu as="div" className="ml-3 relative">
                       {({ open }) => (
@@ -127,7 +127,7 @@ const Navbar = () => {
                       {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
                       <a
                         href="/"
-                        className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
+                        className="text-gray-800 hover:bg-yellow-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                       >
                         {item}
                       </a>
@@ -154,16 +154,12 @@ const Navbar = () => {
                   </div>
                   <div className="ml-3">
                     <div className="text-base font-medium leading-none text-white">
-                      Tom Cook
+                      Tom Squawk
                     </div>
                     <div className="text-sm font-medium leading-none text-gray-400">
-                      tom@example.com
+                      squawk@squawk.com
                     </div>
                   </div>
-                  <button className="ml-auto bg-gray-800 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
                 </div>
                 <div className="mt-3 px-2 space-y-1">
                   {profile.map((item) => (

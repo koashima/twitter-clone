@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { LockClosedIcon } from '@heroicons/react/solid';
 
 const Login = () => {
@@ -24,13 +25,13 @@ const Login = () => {
                 </h2>
                 <p className="mt-2 text-center text-sm text-gray-600">
                   Or
-                  <a
-                    href="/signup!"
-                    className="font-medium text-yellow-400 hover:text-yellow-500"
+                  <Link
+                    to="/signup!"
+                    className="font-medium text-yellow-400 hover:text-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 rounded"
                   >
                     {' '}
                     sign up for your free account!
-                  </a>
+                  </Link>
                 </p>
               </div>
               <form className="mt-8 space-y-6" action="#" method="POST">
@@ -85,7 +86,7 @@ const Login = () => {
                   <div className="text-sm">
                     <a
                       href="#"
-                      className="font-medium text-yellow-400 hover:text-yellow-500"
+                      className="font-medium text-yellow-400 hover:text-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 rounded"
                     >
                       Forgot your password?
                     </a>
@@ -95,11 +96,11 @@ const Login = () => {
                 <div>
                   <button
                     type="submit"
-                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-300 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
                   >
                     <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                       <LockClosedIcon
-                        className="h-5 w-5 text-yellow-500 group-hover:text-yellow-400"
+                        className="h-5 w-5 text-yellow-500 group-hover:text-yellow-"
                         aria-hidden="true"
                       />
                     </span>

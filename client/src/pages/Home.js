@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 
@@ -40,9 +41,12 @@ const Home = () => {
                   <p className="text-black dark:text-white block text-xl leading-snug mt-3">
                     {post.body}
                   </p>
-                  <p className="text-gray-500 dark:text-gray-400 text-xs py-1 my-0.5">
+                  <Link
+                    to={`/posts/${post.id}`}
+                    className="text-gray-500 dark:text-gray-400 text-xs py-1 my-0.5"
+                  >
                     {post.createdAt}
-                  </p>
+                  </Link>
 
                   <hr />
                   <div className="text-gray-500 dark:text-gray-400 flex justify-between mt-3">
