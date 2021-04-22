@@ -1,5 +1,4 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { set } from 'mongoose';
 import { Fragment, useRef, useEffect, useState } from 'react';
 
 const ErrorsModal = ({ errors }) => {

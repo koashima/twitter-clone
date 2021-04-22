@@ -4,35 +4,28 @@ import { LockClosedIcon } from '@heroicons/react/solid';
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import ErrorsModal from '../components/ErrorsModal';
+import { useForm } from '../utils/hooks';
 
-const Register = () => {
+const Register = ({ history }) => {
   const [errors, setErrors] = useState({});
-  const [values, setValues] = useState({
+  
+  const { onChange, handleSubmit, values } = useForm(() => registerUser(), {
     username: '',
     email: '',
     password: '',
     confirmPassword: '',
   });
-
-  const onChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
-
+  
   const [registerUser, { loading }] = useMutation(REGISTER_USER, {
     update(proxy, result) {
       console.log(result);
+      history.push('/');
     },
     onError(err) {
-      console.log(err.graphQLErrors[0].extensions.exception.errors);
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
   });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    registerUser();
-  };
 
   return (
     <>
@@ -81,7 +74,6 @@ const Register = () => {
                       id="username"
                       name="username"
                       type="text"
-
                       className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                       placeholder="Username"
                       value={values.username}
@@ -96,7 +88,6 @@ const Register = () => {
                       id="email"
                       name="email"
                       type="email"
-
                       className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                       placeholder="Email@email.com"
                       value={values.email}
@@ -148,7 +139,7 @@ const Register = () => {
                 </div>
               </form>
             </div>
-            <ErrorsModal errors={errors}/>
+            <ErrorsModal errors={errors} />
           </div>
         </div>
       </main>
