@@ -3,19 +3,20 @@ import { Link } from 'react-router-dom';
 import { LockClosedIcon } from '@heroicons/react/solid';
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
+import { ReactComponent as Logo } from '../assets/swan.svg';
 import ErrorsModal from '../components/ErrorsModal';
 import { useForm } from '../utils/hooks';
 
 const Register = ({ history }) => {
   const [errors, setErrors] = useState({});
-  
+
   const { onChange, handleSubmit, values } = useForm(() => registerUser(), {
     username: '',
     email: '',
     password: '',
     confirmPassword: '',
   });
-  
+
   const [registerUser, { loading }] = useMutation(REGISTER_USER, {
     update(proxy, result) {
       console.log(result);
@@ -39,11 +40,9 @@ const Register = ({ history }) => {
           <div className="min-h-screen flex justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8">
               <div>
-                <img
-                  className="mx-auto h-12 w-auto"
-                  src="https://www.flaticon.com/svg/vstatic/svg/1843/1843254.svg?token=exp=1618883264~hmac=3fbda545185ea9c9af4deca993e03a29"
-                  alt="Workflow"
-                />
+                <div className="flex justify-center">
+                  <Logo width="200" height="200" />
+                </div>
                 <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
                   Sign up for your account!
                 </h2>
