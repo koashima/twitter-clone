@@ -10,14 +10,12 @@ import { useForm } from '../utils/hooks';
 const Login = ({ history }) => {
   const [errors, setErrors] = useState({});
 
-  const { onChange, handleSubmit, values } = useForm(() => registerUser(), {
+  const { onChange, handleSubmit, values } = useForm(() => loginUser(), {
     username: '',
-    email: '',
     password: '',
-    confirmPassword: '',
   });
 
-  const [registerUser, { loading }] = useMutation(REGISTER_USER, {
+  const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(proxy, result) {
       console.log(result);
       history.push('/');
@@ -80,20 +78,6 @@ const Login = ({ history }) => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="email-address" className="sr-only">
-                      Email
-                    </label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
-                      placeholder="Email@email.com"
-                      value={values.email}
-                      onChange={onChange}
-                    />
-                  </div>
-                  <div>
                     <label htmlFor="password" className="sr-only">
                       Password
                     </label>
@@ -101,23 +85,9 @@ const Login = ({ history }) => {
                       id="password"
                       name="password"
                       type="password"
-                      className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
+                      className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                       placeholder="Password"
                       value={values.password}
-                      onChange={onChange}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="password" className="sr-only">
-                      Password
-                    </label>
-                    <input
-                      id="confirmPassword"
-                      name="confirmPassword"
-                      type="password"
-                      className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
-                      placeholder="Confirm Password"
-                      value={values.confirmPassword}
                       onChange={onChange}
                     />
                   </div>
@@ -145,21 +115,9 @@ const Login = ({ history }) => {
     </>
   );
 };
-const REGISTER_USER = gql`
-  mutation register(
-    $username: String!
-    $email: String!
-    $password: String!
-    $confirmPassword: String!
-  ) {
-    register(
-      registerInput: {
-        username: $username
-        email: $email
-        password: $password
-        confirmPassword: $confirmPassword
-      }
-    ) {
+const LOGIN_USER = gql`
+  mutation login($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
       id
       username
       email
