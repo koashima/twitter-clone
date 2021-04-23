@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { LockClosedIcon } from '@heroicons/react/solid';
 import { ReactComponent as Logo } from '../assets/swan.svg';
 import ErrorsModal from '../components/ErrorsModal';
+import { AuthContext } from '../context/auth';
 import { useForm } from '../utils/hooks';
 
 const Login = ({ history }) => {
+  const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
 
   const { onChange, handleSubmit, values } = useForm(() => loginUser(), {
@@ -17,7 +19,7 @@ const Login = ({ history }) => {
 
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(proxy, result) {
-      console.log(result);
+      context.login(result.data.login);
       history.push('/');
     },
     onError(err) {
