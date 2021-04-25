@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
-import gql from 'graphql-tag';
-import { useMutation } from '@apollo/client';
+import { Link, withRouter } from 'react-router-dom';
 import { LockClosedIcon } from '@heroicons/react/solid';
 import { ReactComponent as Logo } from '../assets/swan.svg';
 import ErrorsModal from '../components/ErrorsModal';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/client';
 import { AuthContext } from '../context/auth';
 import { useForm } from '../utils/hooks';
 
@@ -18,7 +18,7 @@ const Login = ({ history }) => {
   });
 
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
-    update(proxy, result) {
+    update(_proxy, result) {
       context.login(result.data.login);
       history.push('/');
     },
@@ -32,7 +32,18 @@ const Login = ({ history }) => {
     <>
       <header className="bg-gray-50 shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">Log in!</h1>
+          {!context.user ? (
+            <h1 className="text-3xl font-bold text-gray-800">
+              Please <span className="text-yellow-300">Log in </span>
+              or <span className="text-yellow-300"> Sign up </span>
+              to experience <span className="text-yellow-300">Squawk!</span>
+            </h1>
+          ) : (
+            <h1 className="text-3xl font-bold text-gray-800">
+              Log in! to a different account?!
+            </h1>
+          )}
+          <h1></h1>
         </div>
       </header>
       <main>
@@ -52,7 +63,6 @@ const Login = ({ history }) => {
                     to="/login!"
                     className="font-medium text-yellow-400 hover:text-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 rounded"
                   >
-                    {' '}
                     sign up for your account!
                   </Link>
                 </p>
@@ -128,4 +138,4 @@ const LOGIN_USER = gql`
     }
   }
 `;
-export default Login;
+export default withRouter(Login);

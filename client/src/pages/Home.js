@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
+import { AuthContext } from '../context/auth';
+import Login from './Login'
 
 const Home = () => {
+  const { user } = useContext(AuthContext);
   const { loading, data } = useQuery(FETCH_POSTS_QUERY);
   const likePost = () => console.log('add like functionality');
   const showComments = () =>
     console.log('show post disclosure with focous on adding a comment?');
-  return (
+  const home = !user ? (
+    <Login />
+  ) : (
     <>
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -31,7 +36,7 @@ const Home = () => {
                     <div className="flex items-center">
                       <img
                         className="h-11 w-11 rounded-full"
-                        src="https://pbs.twimg.com/profile_images/1287562748562309122/4RLk5A_U_x96.jpg"
+                        src="https://via.placeholder.com/150/FFFF00/000000"
                       />
                       <div className="ml-1.5 text-sm leading-tight">
                         <span className="text-black dark:text-white font-bold block ">
@@ -97,6 +102,7 @@ const Home = () => {
       </main>
     </>
   );
+  return home;
 };
 const FETCH_POSTS_QUERY = gql`
   {
