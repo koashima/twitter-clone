@@ -1,6 +1,6 @@
 import { Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Disclosure, Menu } from '@headlessui/react';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import { ReactComponent as Logo } from '../assets/swan.svg';
 import { AuthContext } from '../context/auth';
@@ -19,56 +19,94 @@ const Navbar = () => {
                 <Menu as="div" className="ml-3 relative">
                   {({ open }) => (
                     <>
-                      <div>
-                        <div className="text-white hover:bg-yellow-500 px-3 py-2 rounded-md text-xl font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 rounded">
-                          <span className="sr-only">Back to Home!</span>
-                          <Link to="/">Squawk! {user.username}!</Link>
-                          <Menu.Button>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="h-6 w-6 ml-2 inline"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M19 9l-7 7-7-7"
-                              />
-                            </svg>
-                          </Menu.Button>
-                        </div>
+                      <div className="text-white hover:bg-yellow-500 px-3 py-2 rounded-md text-xl font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 rounded">
+                        <span className="sr-only">Back to Home!</span>
+                        <Link to="/">Squawk! {user.username}!</Link>
+                        <Menu.Button>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6 ml-2 inline"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </Menu.Button>
                       </div>
-
-                      <Menu.Items>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              className={`${active && 'bg-blue-500'}`}
-                              href="/account-settings"
-                            >
-                              Account settings
-                            </a>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              className={`${active && 'bg-blue-500'}`}
-                              href="/account-settings"
-                            >
-                              Documentation
-                            </a>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item disabled>
-                          <span className="opacity-75">
-                            Invite a friend (coming soon!)
-                          </span>
-                        </Menu.Item>
-                      </Menu.Items>
+                      <Transition
+                        show={open}
+                        as={Fragment}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
+                        <Menu.Items
+                          static
+                          className="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                        >
+                          <div className="px-1 py-1 ">
+                            <Menu.Item>
+                              {({ active }) => (
+                                <Link
+                                  to="/"
+                                  className={`${
+                                    active
+                                      ? 'bg-yellow-500 text-white'
+                                      : 'text-gray-900'
+                                  } group flex rounded-md items-center w-full px-1 py-2 text-base`}
+                                >
+                                  {active ? (
+                                    <div
+                                      className="w-5 h-5 mr-2"
+                                      aria-hidden="true"
+                                    />
+                                  ) : (
+                                    <div
+                                      className="w-5 h-5 mr-2"
+                                      aria-hidden="true"
+                                    />
+                                  )}
+                                  Home?!
+                                </Link>
+                              )}
+                            </Menu.Item>
+                            <Menu.Item>
+                              {({ active }) => (
+                                <Link
+                                  to="/login!"
+                                  className={`${
+                                    active
+                                      ? 'bg-yellow-500 text-white'
+                                      : 'text-gray-900'
+                                  } group flex rounded-md items-center w-full px-1 py-2 text-base text-justify`}
+                                >
+                                  {active ? (
+                                    <div
+                                      className="w-5 h-5 mr-2"
+                                      aria-hidden="true"
+                                    />
+                                  ) : (
+                                    <div
+                                      className="w-5 h-5 mr-2"
+                                      aria-hidden="true"
+                                    />
+                                  )}
+                                  Log in with a different account?!
+                                </Link>
+                              )}
+                            </Menu.Item>
+                          </div>
+                        </Menu.Items>
+                      </Transition>
                     </>
                   )}
                 </Menu>
@@ -107,6 +145,12 @@ const Navbar = () => {
                 className="text-gray-100 hover:bg-yellow-500 hover:text-white block px-3 py-2 rounded-md text-xl font-medium"
               >
                 Home!
+              </Link>
+              <Link
+                to="/login!"
+                className="text-gray-100 hover:bg-yellow-500 hover:text-white block px-3 py-2 rounded-md text-xl font-medium"
+              >
+                Log in to a different account?!
               </Link>
               <div
                 onClick={logout}

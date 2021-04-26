@@ -63,6 +63,7 @@ const Login = ({ history }) => {
                     to="/login!"
                     className="font-medium text-yellow-400 hover:text-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 rounded"
                   >
+                    {' '}
                     sign up for your account!
                   </Link>
                 </p>
