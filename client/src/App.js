@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Navbar from './components/Navbar';
+import AuthRoute from './utils/AuthRoute';
 const App = () => {
   return (
     <AuthProvider>
@@ -14,7 +15,7 @@ const App = () => {
 
           <Route exact path="/" component={Home} />
           <Route exact path="/login!" component={Login} />
-          <Route exact path="/signup!" component={Register} />
+          <AuthRoute exact path="/signup!" component={Register} />
         </Router>
       </div>
     </AuthProvider>
