@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import { AuthContext } from '../context/auth';
-import Login from './Login'
+import Login from './Login';
+import PostForm from '../components/PostForm';
 
 const Home = () => {
   const { user } = useContext(AuthContext);
@@ -23,6 +24,8 @@ const Home = () => {
       <main>
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex justify-center">
           <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+            <h2 className="text-xl">hey {user.username}...</h2>
+            <PostForm />
             {loading ? (
               <div>loading...</div>
             ) : (
@@ -36,6 +39,7 @@ const Home = () => {
                     <div className="flex items-center">
                       <img
                         className="h-11 w-11 rounded-full"
+                        alt="user's profile photo"
                         src="https://via.placeholder.com/150/FFFF00/000000"
                       />
                       <div className="ml-1.5 text-sm leading-tight">
