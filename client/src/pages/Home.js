@@ -39,7 +39,7 @@ const Home = () => {
                     <div className="flex items-center">
                       <img
                         className="h-11 w-11 rounded-full"
-                        alt="user's profile photo"
+                        alt="user's profile "
                         src="https://via.placeholder.com/150/FFFF00/000000"
                       />
                       <div className="ml-1.5 text-sm leading-tight">

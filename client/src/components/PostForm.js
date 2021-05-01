@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { useForm } from '../utils/hooks';
@@ -9,7 +9,7 @@ const PostForm = () => {
     body: '',
   });
 
-  const [createPost] = useMutation(CREATE_POST, {
+  const [createPost, { error }] = useMutation(CREATE_POST, {
     update(proxy, result) {
       const data = proxy.readQuery({
         query: FETCH_POSTS_QUERY,
@@ -23,6 +23,7 @@ const PostForm = () => {
       values.body = '';
     },
     variables: values,
+    errorPolicy: 'all',
   });
 
   return (
@@ -30,13 +31,15 @@ const PostForm = () => {
       <input type="hidden" name="remember" defaultValue="true" />
       <div className="flex-col rounded-md">
         <div className="rounded-md flex-grow shadow-sm">
-          <label htmlFor="username" className="sr-only"></label>
+          <label htmlFor="post" className="sr-only"></label>
           <input
-            id="username"
+            id="post"
             name="body"
             type="text"
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded :outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
-            placeholder="What's happening?!"
+            placeholder={
+              error ? error.graphQLErrors[0].message : "What's happening?!"
+            }
             value={values.body}
             onChange={onChange}
           />
@@ -44,7 +47,7 @@ const PostForm = () => {
         <div className="flex justify-end">
           <button
             type="submit"
-            className=" py-2 px-4 mt-2 mb-5 text-base font-medium rounded-full text-white bg-yellow-300 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+            className="py-2 px-4 mt-2 mb-5 text-base font-medium rounded-full text-white bg-yellow-300 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
           >
             Squawk!
           </button>
