@@ -1,9 +1,7 @@
-import React, { Fragment, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
 import { useQuery } from '@apollo/client';
-import { Menu, Transition } from '@headlessui/react';
-import gql from 'graphql-tag';
 import { AuthContext } from '../context/auth';
+import {FETCH_POSTS_QUERY} from '../utils/graphql'
 import Login from './Login';
 import PostForm from '../components/PostForm';
 import Post from '../components/Post';
@@ -38,24 +36,5 @@ const Home = () => {
   );
   return home;
 };
-const FETCH_POSTS_QUERY = gql`
-  {
-    getPosts {
-      id
-      body
-      username
-      createdAt
-      likeCount
-      likes {
-        username
-      }
-      commentCount
-      comments {
-        id
-        username
-        body
-      }
-    }
-  }
-`;
+
 export default Home;

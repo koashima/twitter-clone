@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { LockClosedIcon } from '@heroicons/react/solid';
 import { useMutation } from '@apollo/client';
-import gql from 'graphql-tag';
+import { REGISTER_USER } from '../utils/graphql';
 import { ReactComponent as Logo } from '../assets/swan.svg';
 import ErrorsModal from '../components/ErrorsModal';
 import { AuthContext } from '../context/auth';
@@ -147,27 +147,5 @@ const Register = ({ history }) => {
     </>
   );
 };
-const REGISTER_USER = gql`
-  mutation register(
-    $username: String!
-    $email: String!
-    $password: String!
-    $confirmPassword: String!
-  ) {
-    register(
-      registerInput: {
-        username: $username
-        email: $email
-        password: $password
-        confirmPassword: $confirmPassword
-      }
-    ) {
-      id
-      username
-      email
-      createdAt
-      token
-    }
-  }
-`;
+
 export default Register;

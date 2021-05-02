@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { LockClosedIcon } from '@heroicons/react/solid';
 import { ReactComponent as Logo } from '../assets/swan.svg';
 import ErrorsModal from '../components/ErrorsModal';
-import gql from 'graphql-tag';
+import { LOGIN_USER } from '../utils/graphql';
 import { useMutation } from '@apollo/client';
 import { AuthContext } from '../context/auth';
 import { useForm } from '../utils/hooks';
@@ -128,15 +128,5 @@ const Login = ({ history }) => {
     </>
   );
 };
-const LOGIN_USER = gql`
-  mutation login($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
-      id
-      username
-      email
-      createdAt
-      token
-    }
-  }
-`;
+
 export default withRouter(Login);
